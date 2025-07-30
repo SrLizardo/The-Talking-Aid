@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>The Talking Aid</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <h2>Welcome, {{ username }}!</h2>
+
+<div class="chat-box">
+  {% for exchange in conversation %}
+    <div class="message User"><strong>You:</strong> {{ exchange.user }}</div>
+    <div class="message AI"><strong>AI:</strong> {{ exchange.ai }}</div>
+  {% endfor %}
+</div>
+
+
+  <!-- Main chat input -->
+  <form method="POST" style="margin-bottom: 20px;">
+    <input type="text" name="user_input" placeholder="Say something..." autocomplete="off" required />
+    <button type="submit">Send</button>
+  </form>
+
+  <!-- Quick help tasks section -->
+  <form method="POST">
+    <label for="task_type"><strong>Get quick help with:</strong></label><br />
+    <select name="task_type" id="task_type" required>
+      <option value="" disabled selected>Select a category</option>
+      <option value="emotional support">Emotional Support</option>
+      <option value="stress relief techniques">Stress Relief Techniques</option>
+      <option value="motivational advice">Motivational Advice</option>
+      <option value="time management">Time Management</option>
+      <option value="conflict resolution">Conflict Resolution</option>
+      <option value="self-care tips">Self-Care Tips</option>
+      <option value="communication skills">Communication Skills</option>
+    </select>
+    <br /><br />
+    <button type="submit">Get Help</button>
+  </form>
+
+  <p><a href="/login">Log out</a></p>
+</body>
+</html>
